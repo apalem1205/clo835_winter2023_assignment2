@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  name: mysql
+  labels:
+    app: mysql
+    tier: backend
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      tier: backend
+  template:
+    metadata:
+      labels:
+        tier: backend
+    spec:
+      containers:
+      - name: mysql
+        image: 151660158095.dkr.ecr.us-east-1.amazonaws.com/clo835-assignment2-mysql:Mysql
+        ports:
+        - containerPort: 3306
+        env:
+        - name: DBUSER
+          value: "root"
+        - name: DBPWD
+          value: "pw"
+        - name: MYSQL_ROOT_PASSWORD
+          value: "pw"
+      imagePullSecrets:
+      - name: regcred
