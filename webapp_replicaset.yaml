@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  name: frontend
+  labels:
+    app: employees
+    tier: frontend
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      tier: frontend
+  template:
+    metadata:
+      labels:
+        tier: frontend
+    spec:
+      containers:
+      - name: web-app
+        image: 151660158095.dkr.ecr.us-east-1.amazonaws.com/clo835-assignment2-webapp:webapplication
+        ports:
+        - containerPort: 8080
+        env:
+        - name: DBUSER
+          value: "root"
+        - name: DBPWD
+          value: "pw"
+        - name: DBPORT
+          value: "3306"
+        - name: DBHOST
+          value: "10.244.0.7"
+        - name: APP_COLOR
+          value: "blue"
+      imagePullSecrets:
+      - name: regcred
