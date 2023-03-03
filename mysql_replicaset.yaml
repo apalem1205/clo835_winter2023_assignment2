@@ -4,16 +4,15 @@ metadata:
   name: mysql
   labels:
     app: mysql
-    tier: backend
 spec:
   replicas: 3
   selector:
     matchLabels:
-      tier: backend
+      app: mysql
   template:
     metadata:
       labels:
-        tier: backend
+        app: mysql
     spec:
       containers:
       - name: mysql
@@ -27,5 +26,4 @@ spec:
           value: "pw"
         - name: MYSQL_ROOT_PASSWORD
           value: "pw"
-      imagePullSecrets:
-      - name: regcred
+      
