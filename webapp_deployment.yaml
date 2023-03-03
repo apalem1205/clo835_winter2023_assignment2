@@ -12,6 +12,7 @@ spec:
   template:
     metadata:
       labels:
+      app: employees
     spec:
       containers:
       - name: webapp
