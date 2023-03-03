@@ -4,16 +4,15 @@ metadata:
   name: employees
   labels:
     app: employees
-    tier: frontend
 spec:
   replicas: 3
   selector:
     matchLabels:
-      tier: frontend
+      app: employees
   template:
     metadata:
       labels:
-        tier: frontend
+      app: employees
     spec:
       containers:
       - name: webapp
@@ -31,5 +30,4 @@ spec:
           value: "10.244.0.8"
         - name: APP_COLOR
           value: "blue"
-      imagePullSecrets:
-      - name: regcred
+   
